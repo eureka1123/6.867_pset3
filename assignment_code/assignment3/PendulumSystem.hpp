@@ -12,6 +12,7 @@ class PendulumSystem : public ParticleSystemBase {
                                               float time) const override;
     void AddParticle(const glm::vec3 particle_position, float mass, bool fix);
     void AddSpring(int particle_1, int particle_2, float rest_length, float spring_constant);
+    void ChangeParticleState(int particle_index, bool state);
     ParticleState state_;
   private:
     std::vector<float> masses_;

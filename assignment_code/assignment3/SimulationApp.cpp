@@ -20,7 +20,9 @@
 #include "EulerPendulum.hpp"
 #include "TrapezoidPendulum.hpp"
 #include "RK4Pendulum.hpp"
-
+#include "EulerCloth.hpp"
+#include "TrapezoidCloth.hpp"
+#include "RK4Cloth.hpp"
 
 
 namespace GLOO {
@@ -66,17 +68,24 @@ void SimulationApp::SetupScene() {
     root.AddChild(std::move(particle_node));
     auto pendulum_node = make_unique<EulerPendulum>(integration_step_);
     root.AddChild(std::move(pendulum_node));
+    auto cloth_node = make_unique<EulerCloth>(integration_step_);
+    root.AddChild(std::move(cloth_node));
   }
   else if (integrator_type_ == IntegratorType::Trapezoidal){
     auto particle_node = make_unique<TrapezoidNode>(integration_step_);
     root.AddChild(std::move(particle_node));
     auto pendulum_node = make_unique<TrapezoidPendulum>(integration_step_);
     root.AddChild(std::move(pendulum_node));
-  } else if (integrator_type_ == IntegratorType::RK4){
+    auto cloth_node = make_unique<TrapezoidCloth>(integration_step_);
+    root.AddChild(std::move(cloth_node));
+  } 
+  else if (integrator_type_ == IntegratorType::RK4){
     auto particle_node = make_unique<RK4Node>(integration_step_);
     root.AddChild(std::move(particle_node));
     auto pendulum_node = make_unique<RK4Pendulum>(integration_step_);
     root.AddChild(std::move(pendulum_node));
+    auto cloth_node = make_unique<RK4Cloth>(integration_step_);
+    root.AddChild(std::move(cloth_node));
   }
 
 }

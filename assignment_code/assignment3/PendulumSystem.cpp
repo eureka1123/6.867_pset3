@@ -66,20 +66,12 @@ void PendulumSystem::AddParticle(const glm::vec3 particle_position, float mass, 
 }
 
 void PendulumSystem::AddSpring(int particle_1, int particle_2, float rest_length, float spring_constant){
-  // if (springs_.find(particle_1) == springs_.end()) {
-  //   springs_[particle_1] = {particle_2, {rest_length, spring_constant}};
-  // } else {
   springs_[particle_1][particle_2] = {rest_length, spring_constant};
-  // }
-  // if (springs_.find(particle_2) == springs_.end()) {
-    // springs_[particle_2] = {particle_1, {rest_length, spring_constant}};
-  // } else {
   springs_[particle_2][particle_1] = {rest_length, spring_constant};
-  // }
 }
 
-// void PendulumSystem::FixParticle(int particle_index){
-
-// }
+void PendulumSystem::ChangeParticleState(int particle_index, bool state){
+  flags_[particle_index] = state;
+}
 
 }
